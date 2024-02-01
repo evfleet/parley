@@ -1,0 +1,21 @@
+{
+  "name": "@parley/docs",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Evan Fleet",
+  "type": "module",
+  "scripts": {
+    "astro": "astro",
+    "build": "astro check && astro build",
+    "dev": "astro dev",
+    "preview": "astro preview",
+    "start": "astro dev"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.4.1",
+    "@astrojs/starlight": "^0.17.2",
+    "astro": "^4.2.1",
+    "sharp": "^0.32.5",
+    "typescript": "^5.3.3"
+  }
+}
