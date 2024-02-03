@@ -1,0 +1,19 @@
+{
+  "name": "@parley/api",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Evan Fleet",
+  "scripts": {
+    "dev": "tsx watch src/index.ts | pino-pretty"
+  },
+  "dependencies": {
+    "fastify": "^4.26.0",
+    "fastify-plugin": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "pino-pretty": "^10.3.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
