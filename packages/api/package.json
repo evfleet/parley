@@ -7,11 +7,16 @@
     "dev": "tsx watch src/index.ts | pino-pretty"
   },
   "dependencies": {
+    "dotenv": "^16.4.1",
+    "drizzle-orm": "^0.29.3",
     "fastify": "^4.26.0",
-    "fastify-plugin": "^4.5.1"
+    "fastify-plugin": "^4.5.1",
+    "pg": "^8.11.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.16",
+    "@types/pg": "^8.11.0",
+    "drizzle-kit": "^0.20.14",
     "pino-pretty": "^10.3.1",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
