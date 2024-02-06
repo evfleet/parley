@@ -5,6 +5,18 @@ import discussionController from "./discussion.controller";
 import discussionSchemas from "./discussion.schema";
 
 export default async function (fastify: FastifyInstance) {
+  // Add tag to all routes
+  fastify.addHook("onRoute", (routeOptions) => {
+    if (routeOptions.schema) {
+      routeOptions.schema = {
+        ...routeOptions.schema,
+        tags: [...(routeOptions.schema.tags || []), "Discussions"],
+      };
+    } else {
+      routeOptions.schema = { tags: ["Discussions"] };
+    }
+  });
+
   fastify.withTypeProvider<ZodTypeProvider>().route({
     method: "GET",
     url: "/:discussionId",
@@ -16,7 +28,7 @@ export default async function (fastify: FastifyInstance) {
 
   fastify.withTypeProvider<ZodTypeProvider>().route({
     method: "GET",
-    url: "/:id/comments",
+    url: "/:discussionId/comments",
     handler: (request, reply) => {},
   });
 

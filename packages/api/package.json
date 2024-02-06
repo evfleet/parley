@@ -7,6 +7,8 @@
     "dev": "tsx watch src/index.ts | pino-pretty"
   },
   "dependencies": {
+    "@fastify/swagger": "^8.14.0",
+    "@fastify/swagger-ui": "^2.1.0",
     "dotenv": "^16.4.1",
     "drizzle-orm": "^0.29.3",
     "fastify": "^4.26.0",

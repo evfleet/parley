@@ -1,5 +1,8 @@
+import fastifySwagger from "@fastify/swagger";
+import fastifySwaggerUI from "@fastify/swagger-ui";
 import fastify from "fastify";
 import {
+  jsonSchemaTransform,
   serializerCompiler,
   validatorCompiler,
 } from "fastify-type-provider-zod";
@@ -14,6 +17,19 @@ export async function build() {
 
   app.setSerializerCompiler(serializerCompiler);
   app.setValidatorCompiler(validatorCompiler);
+
+  app.register(fastifySwagger, {
+    openapi: {
+      info: {
+        title: "Parley",
+        version: "0.1.0",
+      },
+    },
+    transform: jsonSchemaTransform,
+  });
+  app.register(fastifySwaggerUI, {
+    routePrefix: "/docs",
+  });
 
   app.register(database);
   app.register(modules);
