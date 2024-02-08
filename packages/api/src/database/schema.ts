@@ -9,14 +9,14 @@ import { boolean, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 // - users can report comments
 
 // user belongs to a team which belongs to a tenant
-export const tenant = pgTable("tenant", {
+export const tenants = pgTable("tenants", {
   id: serial("id"),
   name: text("name"),
   created_at: timestamp("created_at"),
   updated_at: timestamp("updated_at"),
 });
 
-export const team = pgTable("team", {
+export const teams = pgTable("teams", {
   id: serial("id"),
   name: text("name"),
   tenant_id: serial("tenant_id"),
@@ -25,7 +25,7 @@ export const team = pgTable("team", {
 });
 
 // each user has a role in a team, can have different roles in different teams
-export const user = pgTable("user", {
+export const users = pgTable("users", {
   id: serial("id"),
   email: text("email"),
   password: text("password"),
@@ -34,7 +34,7 @@ export const user = pgTable("user", {
   updated_at: timestamp("updated_at"),
 });
 
-export const discussion = pgTable("discussion", {
+export const discussions = pgTable("discussions", {
   id: serial("id"),
   slug: text("slug"),
   tenant_id: serial("tenant_id"),
@@ -42,7 +42,7 @@ export const discussion = pgTable("discussion", {
   updated_at: timestamp("updated_at"),
 });
 
-export const comment = pgTable("comment", {
+export const comments = pgTable("comments", {
   id: serial("id"),
   text: text("text"),
   anonymous: boolean("anonymous"),
