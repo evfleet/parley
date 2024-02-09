@@ -16,6 +16,19 @@ export const tenants = pgTable("tenants", {
   updated_at: timestamp("updated_at"),
 });
 
+// tenant has many clients
+// client has discussions
+export const clients = pgTable("clients", {
+  id: serial("id"),
+  name: text("name"),
+  tenant_id: serial("tenant_id"),
+  created_at: timestamp("created_at"),
+  updated_at: timestamp("updated_at"),
+});
+
+// client has a team
+// team has many users
+// users can have different roles in different teams
 export const teams = pgTable("teams", {
   id: serial("id"),
   name: text("name"),
@@ -24,7 +37,6 @@ export const teams = pgTable("teams", {
   updated_at: timestamp("updated_at"),
 });
 
-// each user has a role in a team, can have different roles in different teams
 export const users = pgTable("users", {
   id: serial("id"),
   email: text("email"),
@@ -34,6 +46,7 @@ export const users = pgTable("users", {
   updated_at: timestamp("updated_at"),
 });
 
+// discussion belongs to a client
 export const discussions = pgTable("discussions", {
   id: serial("id"),
   slug: text("slug"),
