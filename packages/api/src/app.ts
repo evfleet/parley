@@ -1,3 +1,5 @@
+import fastifyCookie from "@fastify/cookie";
+import fastifySession from "@fastify/session";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUI from "@fastify/swagger-ui";
 import fastify from "fastify";
@@ -17,6 +19,11 @@ export async function build() {
 
   app.setSerializerCompiler(serializerCompiler);
   app.setValidatorCompiler(validatorCompiler);
+
+  app.register(fastifyCookie);
+  app.register(fastifySession, {
+    secret: "secret",
+  });
 
   app.register(fastifySwagger, {
     openapi: {
