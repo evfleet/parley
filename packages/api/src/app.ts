@@ -1,5 +1,3 @@
-import fastifyCookie from "@fastify/cookie";
-import fastifySession from "@fastify/session";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUI from "@fastify/swagger-ui";
 import fastify from "fastify";
@@ -9,8 +7,7 @@ import {
   validatorCompiler,
 } from "fastify-type-provider-zod";
 
-import modules from "./modules";
-import database from "./plugins/database";
+import modules from "./modules/index.js";
 
 export async function build() {
   const app = fastify({
@@ -19,11 +16,6 @@ export async function build() {
 
   app.setSerializerCompiler(serializerCompiler);
   app.setValidatorCompiler(validatorCompiler);
-
-  app.register(fastifyCookie);
-  app.register(fastifySession, {
-    secret: "secret",
-  });
 
   app.register(fastifySwagger, {
     openapi: {
@@ -38,7 +30,6 @@ export async function build() {
     routePrefix: "/docs",
   });
 
-  app.register(database);
   app.register(modules);
 
   return app;

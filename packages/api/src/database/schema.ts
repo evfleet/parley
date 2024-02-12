@@ -1,4 +1,19 @@
-import { boolean, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+
+export const users = pgTable("user", {
+  id: text("id").primaryKey(),
+});
+
+export const sessions = pgTable("session", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id),
+  expiresAt: timestamp("expires_at", {
+    withTimezone: true,
+    mode: "date",
+  }).notNull(),
+});
 
 // the following requirements:
 // - users can sign up and create an account
@@ -16,6 +31,7 @@ export const tenants = pgTable("tenants", {
   updated_at: timestamp("updated_at"),
 });
 
+/*
 // tenant has many clients
 // client has discussions
 export const clients = pgTable("clients", {
@@ -64,3 +80,4 @@ export const comments = pgTable("comments", {
   created_at: timestamp("created_at"),
   updated_at: timestamp("updated_at"),
 });
+*/

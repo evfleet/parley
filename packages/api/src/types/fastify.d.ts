@@ -1,7 +1,9 @@
-import { NodePgDatabase } from "drizzle-orm/node-postgres";
+import { PgDatabase } from "drizzle-orm/node-postgres";
+import { Lucia } from "lucia";
 
 declare module "fastify" {
   export interface FastifyInstance {
-    db: NodePgDatabase;
+    db: PgDatabase;
+    auth: Lucia;
   }
 }
