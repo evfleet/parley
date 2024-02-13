@@ -6,17 +6,24 @@ import { db } from "./database.js";
 
 const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
 
-export const lucia = new Lucia(adapter, {
+export const auth = new Lucia(adapter, {
   sessionCookie: {
     attributes: {
       secure: process.env.NODE_ENV === "production",
     },
   },
+  getUserAttributes: (attributes) => {
+    return {
+      email: attributes.email,
+    };
+  },
 });
 
-// IMPORTANT!
 declare module "lucia" {
   interface Register {
-    Lucia: typeof lucia;
+    Lucia: typeof auth;
+    DatabaseUserAttributes: {
+      email: string;
+    };
   }
 }
